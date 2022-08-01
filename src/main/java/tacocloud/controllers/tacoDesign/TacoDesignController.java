@@ -3,6 +3,7 @@ package tacocloud.controllers.tacoDesign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 import tacocloud.domains.ingredient.Ingredient;
 import tacocloud.domains.ingredient.Ingredient.Type;
 import tacocloud.domains.taco.Taco;
+
+import javax.validation.Valid;
 
 
 @Slf4j
@@ -47,7 +50,10 @@ public class TacoDesignController {
     }
 
     @PostMapping
-    public String processDesign(Taco design) {
+    public String processDesign(@Valid Taco design, Errors errors) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
         // Persistence logic to follow
         log.info("Processing Design: " + design);
 
