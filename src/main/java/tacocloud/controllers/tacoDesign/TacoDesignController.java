@@ -52,7 +52,7 @@ public class TacoDesignController {
     @PostMapping
     public String processDesign(@Valid Taco design, Errors errors) {
         if (errors.hasErrors()) {
-            return "design";
+            return "design/design";
         }
         // Persistence logic to follow
         log.info("Processing Design: " + design);
